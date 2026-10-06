@@ -1,0 +1,112 @@
+End User License Agreement
+==========================
+
+Version of 6 October 2026
+
+This is an English translation provided for information only. The Russian
+version of this document is legally binding; in case of any discrepancy
+between the two versions, the Russian version prevails.
+
+This agreement is concluded between Индивидуальный предприниматель Липкина
+Лидия Александровна (INN 524830916587, OGRNIP 326527500103167, address:
+603159, Россия, г. Нижний Новгород, Волжская набережная, 8/3 - 187) (the
+“Rights Holder”) and the person who installs or uses the “Scanner” software
+(libraries for reading and generating DataMatrix codes, their command-line
+utilities and Python packages; the “Software”) (the “User”).
+
+1. Conclusion of the agreement
+
+  - The agreement is a contract of adhesion (Clause 5 of Article 1286 of the
+    Civil Code of the Russian Federation). Its text is attached to every
+    copy of the Software (the LICENSE.txt file in the archive) and is
+    published on the website. Starting to use the Software — installing it,
+    running it, or linking the library to a program — constitutes the User’s
+    acceptance of the agreement.
+  - If the User does not agree with the agreement, the User may not use the
+    Software and must delete its copies.
+
+2. Trial use
+
+  - The Rights Holder grants the User, free of charge, a simple (non-
+    exclusive) license to use the Software for the purpose of becoming
+    familiar with it and evaluating its capabilities for 30 days from the
+    first run of the Software on a computer. No registration or key is
+    required for this.
+  - The Software may be reproduced (installed and run), including as part of
+    the User’s own programs to which the library is linked.
+  - When the trial period ends, the Software stops working until a license
+    key is activated. Further use is possible only under a license acquired
+    under the public offer.
+
+3. Use under a license
+
+The scope of rights, the number of computers and the term of a paid license
+are determined by the public offer (license agreement) and the order. A paid
+license also covers the use of the Software as part of the User’s own
+programs on the computers for which it was acquired. For a paid license,
+this agreement applies to the extent it does not contradict the offer; in
+the event of a discrepancy, the offer prevails.
+
+4. Restrictions
+
+The User may not:
+
+  - distribute the Software or its parts in a form that allows them to be
+    used separately from the User’s programs, sell or rent them out, or
+    grant sublicenses;
+  - transfer license keys to third parties;
+  - decompile or modify the Software, or circumvent technical protection
+    measures, including the trial period limitation, except in cases
+    expressly permitted by Article 1280 of the Civil Code of the Russian
+    Federation;
+  - remove or alter information about the Rights Holder or the license texts
+    attached to the Software.
+
+5. Information transmitted by the Software
+
+During the trial period, the Software transmits nothing over the network. On
+license key activation and license verification, the Software transmits to
+the Rights Holder the computer information needed to limit the number of
+computers; its composition and the processing procedure are described in the
+personal data processing policy. Offline activation is described in the
+documentation on the website.
+
+6. Third-party software
+
+The Software includes components of third-party rights holders distributed
+under their own (open source and free) licenses. The texts of these licenses
+are attached to the Software (the licenses/ directory in the archive); these
+components are governed by the terms of their licenses.
+
+7. Liability
+
+  - During the trial period, the Software is provided free of charge “as
+    is”. The Rights Holder is not liable for losses arising from the use of
+    or inability to use the Software during the trial period, unless
+    otherwise provided by law.
+  - Liability under a paid license is determined by the offer. The consumer
+    rights established by Law of the Russian Federation No. 2300-1 of 7
+    February 1992 “On Protection of Consumer Rights” are not limited by this
+    agreement.
+
+8. Term
+
+The agreement is valid from the start of use of the Software until the end
+of the trial period and, if a license is acquired, for the term of that
+license. In the event of a breach of the agreement, the right to use the
+Software terminates.
+
+9. Governing law and disputes
+
+The agreement is governed by the law of the Russian Federation. Disputes are
+resolved in the manner set out in the “Disputes” section of the public
+offer.
+
+10. Rights Holder
+
+Индивидуальный предприниматель Липкина Лидия Александровна (INN
+524830916587, OGRNIP 326527500103167, address: 603159, Россия, г. Нижний
+Новгород, Волжская набережная, 8/3 - 187). Contact address:
+libscanner@yandex.com. Full details are given on the “Company Details” page.
+
+Published at: https://libscanner.com/en/license-agreement

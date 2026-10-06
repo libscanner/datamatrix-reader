@@ -1,0 +1,46 @@
+dmr — third-party notices
+=========================
+
+The dmr product (the dmr / dmr.exe utility, the libdmr.a and dmr_c libraries,
+the Python wheels) contains the following third-party components. Their
+license texts are in the licenses/ directory of this repository, in
+share/doc/dmr/licenses/ of the binary packages and in dist-info/licenses/ of
+the Python wheel.
+Russian version: THIRD-PARTY-NOTICES.ru.txt.
+
+Component                         License                         File
+--------------------------------  ------------------------------  -------------------------------
+zlib 1.3.1                        zlib                            zlib-LICENSE.txt
+libpng 1.6.59                     libpng (PNG Reference Library   libpng-LICENSE.txt
+                                  License v2)
+libjpeg-turbo 3.1.0               IJG, BSD 3-Clause, zlib         libjpeg-turbo-LICENSE.md
+Monocypher 4.0.2                  BSD 2-Clause or CC0 1.0         monocypher-LICENCE.md
+stb_image 2.30,                   MIT or Public Domain            stb-LICENSE.txt
+stb_image_write 1.16              (Unlicense)
+LSD line segment detector and     Apache 2.0 (OpenCV 4.x);        OpenCV-LICENSE.txt,
+functions ported from             BSD 3-Clause — original LSD     OpenCV-COPYRIGHT.txt
+OpenCV 4.12.0                     license as included in OpenCV
+
+Windows builds only (dmr.exe and dmr_c.dll, compiler runtime linked
+statically):
+
+MinGW-w64 runtime                 BSD, MIT and others, per part   MinGW-w64-runtime-COPYING.txt
+                                  (see the file)
+winpthreads (MinGW-w64)           MIT and BSD 3-Clause            winpthreads-COPYING.txt
+libgcc, libstdc++ (GCC)           GPL 3 with the GCC Runtime      GCC-COPYING3.txt,
+                                  Library Exception 3.1           GCC-COPYING.RUNTIME.txt
+
+libgcc and libstdc++ are also statically linked into libdmr_c.so of the Linux
+builds; the same terms apply (GCC Runtime Library Exception 3.1).
+
+This software is based in part on the work of the Independent JPEG Group.
+
+
+Trademarks
+----------
+
+"GS1" is a trademark of GS1 AISBL. "Chestny Znak" (Честный знак) is a
+trademark of LLC "Operator-CRPT" (ООО «Оператор-ЦРПТ»). "Data Matrix" is the
+name of the barcode symbology defined in ISO/IEC 16022. The dmr product is not
+affiliated with or certified by the owners of these marks; the names are used
+only to describe the supported format.

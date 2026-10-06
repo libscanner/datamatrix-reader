@@ -1,0 +1,45 @@
+dmr — уведомления о сторонних компонентах
+=========================================
+
+Продукт dmr (утилита dmr / dmr.exe, библиотеки libdmr.a и dmr_c, колёса
+Python) содержит следующие сторонние компоненты. Тексты их лицензий лежат
+в каталоге licenses/ этого репозитория, в share/doc/dmr/licenses/ двоичных
+поставок и в dist-info/licenses/ колеса Python.
+English version: THIRD-PARTY-NOTICES.txt.
+
+Компонент                         Лицензия                        Файл
+--------------------------------  ------------------------------  -------------------------------
+zlib 1.3.1                        zlib                            zlib-LICENSE.txt
+libpng 1.6.59                     libpng (PNG Reference Library   libpng-LICENSE.txt
+                                  License v2)
+libjpeg-turbo 3.1.0               IJG, BSD (3 пункта), zlib       libjpeg-turbo-LICENSE.md
+Monocypher 4.0.2                  BSD (2 пункта) или CC0 1.0      monocypher-LICENCE.md
+stb_image 2.30,                   MIT или Public Domain           stb-LICENSE.txt
+stb_image_write 1.16              (Unlicense)
+Детектор отрезков LSD и функции,  Apache 2.0 (OpenCV 4.x);        OpenCV-LICENSE.txt,
+перенесённые из OpenCV 4.12.0     BSD (3 пункта) — исходная       OpenCV-COPYRIGHT.txt
+                                  лицензия LSD в составе OpenCV
+
+Только сборки под Windows (dmr.exe и dmr_c.dll, рантайм компилятора
+слинкован статически):
+
+Рантайм MinGW-w64                 BSD, MIT и др. по частям        MinGW-w64-runtime-COPYING.txt
+                                  (см. файл)
+winpthreads (MinGW-w64)           MIT и BSD (3 пункта)            winpthreads-COPYING.txt
+libgcc, libstdc++ (GCC)           GPL 3 с исключением GCC         GCC-COPYING3.txt,
+                                  Runtime Library Exception 3.1   GCC-COPYING.RUNTIME.txt
+
+libgcc и libstdc++ статически вкомпилированы также в libdmr_c.so сборок под
+Linux; условия те же (GCC Runtime Library Exception 3.1).
+
+This software is based in part on the work of the Independent JPEG Group.
+
+
+Товарные знаки
+--------------
+
+«GS1» — товарный знак GS1 AISBL. «Честный знак» — товарный знак
+ООО «Оператор-ЦРПТ». «Data Matrix» — название символики штрихового кода по
+ISO/IEC 16022. Продукт dmr не связан с владельцами этих знаков и ими не
+сертифицирован; названия упоминаются только для описания поддерживаемого
+формата.
