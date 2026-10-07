@@ -35,6 +35,7 @@ Each platform also has a CLI-only archive (`…-cli.zip` / `…-cli.tar.gz`) wit
 ## Download
 
 - **Binaries:** [GitHub Releases → latest](https://github.com/libscanner/datamatrix-reader/releases/latest) — archives for each platform and Python wheels.
+- **Python:** [PyPI → libscanner-dmr](https://pypi.org/project/libscanner-dmr/) — `pip install libscanner-dmr`, imported as `dmr`.
 - **Licenses:** buy a plan at <https://libscanner.com/en/> — 3 months, 6 months, 1 year or perpetual (for example <https://libscanner.com/en/products/datamatrix-gs1-yearly>). The activation key appears in your account after purchase.
 
 ### Trial
@@ -115,7 +116,7 @@ Complete example: [`examples/cpp`](https://github.com/libscanner/datamatrix-read
 ### Python
 
 ```sh
-pip install dmr-1.0.0-py3-none-win_amd64.whl     # pick the wheel for your platform
+pip install libscanner-dmr     # PyPI: Windows x64, Linux x86-64 / ARM64 / ARMv7 (glibc 2.36+)
 ```
 
 ```python

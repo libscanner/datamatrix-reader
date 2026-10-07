@@ -35,6 +35,7 @@
 ## Загрузка
 
 - **Сборки:** [выпуски на GitHub → последний](https://github.com/libscanner/datamatrix-reader/releases/latest) — архивы для каждой платформы и колёса Python.
+- **Python:** [PyPI → libscanner-dmr](https://pypi.org/project/libscanner-dmr/) — `pip install libscanner-dmr`, импорт — `dmr`.
 - **Лицензии:** тарифы на <https://libscanner.com/> — 3 месяца, 6 месяцев, год или бессрочно (например, <https://libscanner.com/products/datamatrix-gs1-yearly>). Ключ активации появляется в личном кабинете после покупки.
 
 ### Пробный период
@@ -115,7 +116,7 @@ const dmr::ScanResult r = scanner.scan(view);
 ### Python
 
 ```sh
-pip install dmr-1.0.0-py3-none-win_amd64.whl     # колесо своей платформы
+pip install libscanner-dmr     # PyPI: Windows x64, Linux x86-64 / ARM64 / ARMv7 (glibc 2.36+)
 ```
 
 ```python

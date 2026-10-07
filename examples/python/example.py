@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: MIT-0
 """Read DataMatrix codes with the dmr Python package.
 
-Install the wheel for your platform from GitHub Releases first:
+Install the package from PyPI first:
 
-    pip install dmr-1.0.0-py3-none-win_amd64.whl
+    pip install libscanner-dmr
 
 Usage:
 
