@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 — 2026-10-07
+
+- Fixed: frames in `Rgb8` and `Rgba8` pixel formats were rejected — `scan()` returned `NotFound` immediately, so a camera delivering RGB frames read nothing. They are now read exactly like the same frame in `Bgr8` / `Bgra8` (the caller's buffer is not modified).
+- Python package is published on PyPI as `libscanner-dmr` (imported as `dmr`); the wheels are named `libscanner_dmr-*.whl`.
+
 ## 1.0.0 — 2026-10-04
 
 First public release.
