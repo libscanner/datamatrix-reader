@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 — 2026-10-08
+
+- Fixed: symbols on a plane tilted by 40–60° (strong perspective) are found; at 50° the read rate went from 16 % to 100 % on synthetic frames.
+- Fixed: a uniform grid inside a one-block symbol could be accepted as a code with an empty string; it is now rejected.
+- Error correction now also works for symbols without pad codewords (errors up to (nsym − 3) / 2).
+- Checked frame by frame against 1.0.2 on our production-line sets: camera conveyor 8920 of 8959 frames (+1), pharmacy line 4011 of 4019 (unchanged); no frame lost, no string changed; per-frame time unchanged.
+
 ## 1.0.2 — 2026-10-08
 
 - Fixed: a symbol rotated by exactly 45° (also 135°, 225°, 315°) was not found — the corner ordering collapsed the quadrilateral into a triangle. Any rotation angle is read now.
