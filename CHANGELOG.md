@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.6 — 2026-10-09
+
+- Faster on frames that the fast path does not read (about one frame in eight on a pharmacy line): grid refinement on the first detector's candidates now runs before the second detector, the search goes depth-first per candidate, the texture detector uses two variance windows instead of four, and the deep-search ladder is ordered by measured yield. On a 500-frame pharmacy-line sample the 90th percentile of per-frame time went from 51 to 15 ms; frames read within a 60 ms budget went from 472 to 495 of 499 readable, on a 299-frame conveyor sample from 285 to 295 of 296. Well-readable frames are unchanged.
+- With a time budget (`Settings::budgetMs`), a stage whose typical cost exceeds the remaining time is no longer started; the slow tail passes (soft gates, inverted candidates) run only in the pass without a symbol-size hint.
+- `Settings::mcHintRun`: documented that on a line where the symbol size changes from batch to batch the hint should be disabled (0).
+- Checked frame by frame against 1.0.5 on our production-line sets: camera conveyor 8922 of 8959 frames, pharmacy line 4011 of 4019 — identical strings; synthetic sets and multi-code mode unchanged.
+
 ## 1.0.5 — 2026-10-09
 
 - New: inverted symbols — light modules on a dark background (laser marking on dark plastic, print on black packaging) — are read. On synthetic frames 24 of 24 instead of 0. When nothing has been read on a frame, the first candidate crops are retried inverted on the fast path; frames that are read are not affected. An inverted frame currently costs about 1 s, because it goes through the regular search first.
