@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.5 — 2026-10-09
+
+- New: inverted symbols — light modules on a dark background (laser marking on dark plastic, print on black packaging) — are read. On synthetic frames 24 of 24 instead of 0. When nothing has been read on a frame, the first candidate crops are retried inverted on the fast path; frames that are read are not affected. An inverted frame currently costs about 1 s, because it goes through the regular search first.
+- Checked frame by frame against 1.0.4 on our production-line sets: camera conveyor 8922 of 8959 frames, pharmacy line 4011 of 4019 — identical; no false reads on 4000 frames without a valid code; per-frame time on frames that are read is unchanged (a frame that is not read at all pays up to six extra fast attempts).
+
 ## 1.0.4 — 2026-10-09
 
 - Fixed: a white label on a dark box with the label edge one or two modules from the symbol was not read (the symbol merged with the dark background). At a 2-module edge the read rate went from 5 of 12 to 12 of 12 on synthetic frames, at 1 module from 0 to 8 of 12.
