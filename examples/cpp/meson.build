@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT-0
 # Build the dmr C++ example against a prebuilt package from GitHub Releases.
 #
-#   meson setup build --pkg-config-path=/path/to/dmr-1.0.3-<platform>/lib/pkgconfig
+#   meson setup build --pkg-config-path=/path/to/dmr-1.0.4-<platform>/lib/pkgconfig
 #   meson compile -C build
 #
 # The .pc files in the package are relocatable: the unpack directory can be anywhere.

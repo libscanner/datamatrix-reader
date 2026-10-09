@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.4 — 2026-10-09
+
+- Fixed: a white label on a dark box with the label edge one or two modules from the symbol was not read (the symbol merged with the dark background). At a 2-module edge the read rate went from 5 of 12 to 12 of 12 on synthetic frames, at 1 module from 0 to 8 of 12.
+- Fixed: a symbol touching the edge of the frame was never read (its finder pattern was smeared outside the frame); it is read now.
+- Fixed: a false read — a 40×40 symbol with text right next to two of its sides could decode to garbage when all error-correction capacity was spent on erasures. At least four syndromes are now always left to verify the result; multi-block symbols without pad codewords get the same margin as one-block ones. No false reads on 4000 frames without a valid code (text, QR, Code 128, fake and half symbols, overdamaged and mirrored symbols).
+- Dot-peen (DPM) marking reads markedly better: 8–12 of 12 synthetic frames instead of 0–8.
+- Checked frame by frame against 1.0.3 on our production-line sets: camera conveyor 8922 of 8959 frames (+2), pharmacy line 4011 of 4019 (unchanged); no frame lost, no string changed; per-frame time unchanged.
+
 ## 1.0.3 — 2026-10-08
 
 - Fixed: symbols on a plane tilted by 40–60° (strong perspective) are found; at 50° the read rate went from 16 % to 100 % on synthetic frames.
