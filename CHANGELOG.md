@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.7 — 2026-10-10
+
+- Reads frames that other readers read and earlier versions did not:
+  - symbols on a cylinder (bottle, tube): the module grid now follows the alternating edges of the symbol, so a label bent by 120–180° is read (on synthetic sweeps 40 of 72 frames before, 71 now);
+  - pale symbols on a white label (print contrast 0.12–0.08): 0 of 72 before, 72 now;
+  - mirrored symbols (printed on the back of a transparent film): 0 of 24 before, 24 now;
+  - codes under glossy film with a glare spot, and pale codes where trimming cut off a row of modules: 4 more frames of 327 on our pharmacy-package set;
+  - symbols on a plane tilted by 70–75°, and symbols at 2.4–2.9 pixels per module where the default resampling scale missed the modules;
+  - symbols filled to capacity (no pad codewords) now accept erasures when at least 8 syndromes remain unused.
+- On synthetic sweeps of 648 frames (tilt, bend, contrast, noise, damage, gain, mirror) 451 are read instead of 306; no false reads there or on 3500 frames without a valid code.
+- Checked frame by frame against 1.0.6 on our production-line sets: camera conveyor 8923 of 8959 (+1), pharmacy line 4012 of 4019 (+1); no frame lost, no string changed. Frames that are read are not slower; frames that are not read at all spend about 0.1 s more on the extra attempts (cut by the time budget, if set).
+
 ## 1.0.6 — 2026-10-09
 
 - Faster on frames that the fast path does not read (about one frame in eight on a pharmacy line): grid refinement on the first detector's candidates now runs before the second detector, the search goes depth-first per candidate, the texture detector uses two variance windows instead of four, and the deep-search ladder is ordered by measured yield. On a 500-frame pharmacy-line sample the 90th percentile of per-frame time went from 51 to 15 ms; frames read within a 60 ms budget went from 472 to 495 of 499 readable, on a 299-frame conveyor sample from 285 to 295 of 296. Well-readable frames are unchanged.

@@ -21,10 +21,10 @@ Try it online without installing anything: <https://libscanner.com/en/scan>
 
 | Platform | C++ static library + C ABI + CLI | Python wheel |
 |---|---|---|
-| Windows x64 | `dmr-1.0.6-windows-x64.zip` | `libscanner_dmr-1.0.6-py3-none-win_amd64.whl` |
-| Linux x86-64 | `dmr-1.0.6-linux-x64.tar.gz` | `libscanner_dmr-1.0.6-py3-none-manylinux_2_36_x86_64.whl` |
-| Linux ARM64 (Raspberry Pi 3/4/5, 64-bit) | `dmr-1.0.6-linux-arm64.tar.gz` | `libscanner_dmr-1.0.6-py3-none-manylinux_2_36_aarch64.whl` |
-| Linux ARMv7 (Raspberry Pi 2/3/4/5, 32-bit) | `dmr-1.0.6-linux-armhf.tar.gz` | `libscanner_dmr-1.0.6-py3-none-manylinux_2_36_armv7l.whl` |
+| Windows x64 | `dmr-1.0.7-windows-x64.zip` | `libscanner_dmr-1.0.7-py3-none-win_amd64.whl` |
+| Linux x86-64 | `dmr-1.0.7-linux-x64.tar.gz` | `libscanner_dmr-1.0.7-py3-none-manylinux_2_36_x86_64.whl` |
+| Linux ARM64 (Raspberry Pi 3/4/5, 64-bit) | `dmr-1.0.7-linux-arm64.tar.gz` | `libscanner_dmr-1.0.7-py3-none-manylinux_2_36_aarch64.whl` |
+| Linux ARMv7 (Raspberry Pi 2/3/4/5, 32-bit) | `dmr-1.0.7-linux-armhf.tar.gz` | `libscanner_dmr-1.0.7-py3-none-manylinux_2_36_armv7l.whl` |
 
 Each platform also has a CLI-only archive (`…-cli.zip` / `…-cli.tar.gz`) with just the `dmr` tool.
 
@@ -55,7 +55,7 @@ bin/dmr                            command-line tool
 share/doc/dmr/licenses/            third-party licenses
 ```
 
-The headers in [`include/`](https://github.com/libscanner/datamatrix-reader/tree/main/include/dmr) of this repository declare exactly the same API as the headers shipped in the 1.0.6 packages; only the comments differ (translated to English here, Russian in the packages).
+The headers in [`include/`](https://github.com/libscanner/datamatrix-reader/tree/main/include/dmr) of this repository declare exactly the same API as the headers shipped in the 1.0.7 packages; only the comments differ (translated to English here, Russian in the packages).
 
 ## Quick start
 
@@ -88,7 +88,7 @@ int main() {
 Link statically through pkg-config — the query **must** be `--static`:
 
 ```sh
-PKG_CONFIG_PATH=/path/to/dmr-1.0.6-linux-x64/lib/pkgconfig pkg-config --static --cflags --libs dmr
+PKG_CONFIG_PATH=/path/to/dmr-1.0.7-linux-x64/lib/pkgconfig pkg-config --static --cflags --libs dmr
 ```
 
 In Meson:
@@ -100,7 +100,7 @@ executable('myprogram', 'main.cpp', dependencies: [dmr_dep],
 ```
 
 ```sh
-meson setup build --pkg-config-path="$PWD/dmr-1.0.6-windows-x64/lib/pkgconfig"
+meson setup build --pkg-config-path="$PWD/dmr-1.0.7-windows-x64/lib/pkgconfig"
 meson compile -C build
 ```
 

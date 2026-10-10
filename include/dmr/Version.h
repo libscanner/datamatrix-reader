@@ -6,8 +6,8 @@
 
 #define DMR_VERSION_MAJOR 1
 #define DMR_VERSION_MINOR 0
-#define DMR_VERSION_PATCH 6
-#define DMR_VERSION_STRING "1.0.6"
+#define DMR_VERSION_PATCH 7
+#define DMR_VERSION_STRING "1.0.7"
 
 /// The version as a number, for preprocessor comparisons:
 ///     #if DMR_VERSION >= DMR_VERSION_AT(1, 1, 0)
