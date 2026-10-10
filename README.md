@@ -15,7 +15,7 @@ This repository contains the public headers, examples, documentation links and l
 | **100%** | of frames read correctly (8,773 readable frames from a conveyor dataset) |
 | **from 5.3 ms** | minimum time per frame; median over the dataset is 28 ms |
 
-Try it online without installing anything: <https://libscanner.com/en/scan>
+**[Read a DataMatrix code online from a photo](https://libscanner.com/en/scan/)** — free, in the browser, nothing to install.
 
 ## Platforms
 
