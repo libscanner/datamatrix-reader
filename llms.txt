@@ -1,0 +1,38 @@
+# DataMatrix Reader (dmr)
+
+> Commercial C++20 library that reads DataMatrix (ECC 200) codes, including GS1 / Chestny ZNAK marking codes, from industrial camera frames. Static C++ API (`libdmr.a`), flat C ABI (`dmr_c`), Python package (`pip install libscanner-dmr`, `import dmr`) and the `dmr` command-line tool, for Windows x64 and Linux (x86-64, ARM64, ARMv7). This repository holds the public headers, examples and license texts — no library source; prebuilt packages are in GitHub Releases. The library runs a trial period (one month from the first run on a machine, no network needed); after that a license from https://libscanner.com is required.
+
+The public headers are the authoritative API reference: every type, field and function is commented in English. Read them before writing code against the library.
+
+## API reference (headers in this repository)
+
+- [include/dmr/Dmr.h](include/dmr/Dmr.h): umbrella header — includes the whole C++ API
+- [include/dmr/Scanner.h](include/dmr/Scanner.h): the entry point — `dmr::Scanner::scan()`, `dmr::ScanResult` and its status codes
+- [include/dmr/Settings.h](include/dmr/Settings.h): `dmr::Settings` — presets `stream()` (camera frames), `single()` (one-off images), `multi(n)` (all codes), time budget, GS1 check
+- [include/dmr/Image.h](include/dmr/Image.h): the input frame `dmr::ImageView` (pointer, size, stride, pixel format) and `dmr::loadImage` from a file
+- [include/dmr/Geometry.h](include/dmr/Geometry.h): symbol corners and positions in the frame
+- [include/dmr/Diagnostics.h](include/dmr/Diagnostics.h): diagnostics — explaining a finished read and tracing the search
+- [include/dmr/License.h](include/dmr/License.h): trial and license status, activation
+- [include/dmr/Version.h](include/dmr/Version.h): library version
+- [include/dmr/dmr_c.h](include/dmr/dmr_c.h): the flat C ABI (`dmr_c` shared library) — for C, MSVC, C#, Go, Delphi and other languages
+
+## Examples
+
+- [examples/cpp/main.cpp](examples/cpp/main.cpp): C++, static linking ([build notes](examples/cpp/README.md), [meson.build](examples/cpp/meson.build))
+- [examples/c/main.c](examples/c/main.c): C via the C ABI ([build notes](examples/c/README.md))
+- [examples/python/example.py](examples/python/example.py): Python package
+- [examples/cli/README.md](examples/cli/README.md): the `dmr` command-line tool, including `--serve` mode for long-running processes
+
+## Docs
+
+- [Full documentation — C++ and C ABI (Markdown)](https://libscanner.com/en/docs/datamatrix-gs1/1.0/cpp.md): installation, linking on Windows and Linux, settings, result fields, licensing, command line
+- [Full documentation — Python (Markdown)](https://libscanner.com/en/docs/datamatrix-gs1/1.0/python.md)
+- [Both libraries, all documentation in one file](https://libscanner.com/llms-full.txt)
+- [README](README.md): platforms, release files, key numbers
+
+## Optional
+
+- [Read DataMatrix online](https://libscanner.com/en/scan): the same reader as a browser demo
+- [Releases](https://github.com/libscanner/datamatrix-reader/releases/latest): prebuilt packages and Python wheels with SHA256SUMS
+- [CHANGELOG.md](CHANGELOG.md)
+- [LICENSE.en.txt](LICENSE.en.txt): end-user license agreement
