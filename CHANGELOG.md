@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.8 — 2026-10-15
+
+Security and robustness fixes from an internal audit. Recognition results are unchanged: checked frame by frame against 1.0.7 on our production-line sets — camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed.
+
+- **C ABI 3.0 — rebuild required for C callers.** `dmr_settings_t` now has an `abi_tag` field (`DMR_SETTINGS_TAG`) right after `struct_size`, and `struct_size` must lie between `DMR_SETTINGS_MIN_SIZE` and `DMR_SETTINGS_MAX_SIZE`. Settings built with an older header are rejected instead of being read past the end of the caller's struct (with a 1.x header and a large `max_codes` they used to pass the size check). Initialise settings with `DMR_SETTINGS_INIT` (C) or `dmr_settings_prepare(&s)` (C or C++). The library file keeps its name (`dmr_c.dll`, `libdmr_c.so`). The C++ API and the Python package are unaffected; the Python package requires ABI 3.x.
+- **No unbounded frames.** `Settings::timeoutMs` = 0 (and any value above 60 000) now means a 60 s ceiling instead of "no limit": a corrupted 144×144 symbol in a 9 KB PNG could keep the search busy for 40 s and more. For images from untrusted sources also set `budgetMs`.
+- `Settings::warpScales` accepts 1–32 pixels per module; other values are skipped (Python: `ValueError`). `{400}` asked for 2.75 GB per candidate.
+- Progressive JPEG: the scan limit is now 5·10⁸ scans × pixels (at least 16 scans, at most 100), so one file can no longer cost 6–7 s of decoding; honest files with 6–10 scans are unaffected.
+- Corners of a mirrored symbol (printed on the back of a film) are now reported in frame coordinates; the L-pattern corner used to land on the opposite side of the symbol.
+- Python: calls to one `Scanner` from several threads are serialised; `close()` during `scan()` in another thread no longer frees the scanner under a running search.
+- Windows: a shared `%ProgramData%\dmr` copy of the license state owned by another non-admin user is ignored rather than read.
+- Minor: a signed overflow in the AVX2 integral image tail; stale candidate indices after a rejected mirrored/inverted pass.
+
 ## 1.0.7 — 2026-10-10
 
 - Reads frames that other readers read and earlier versions did not:

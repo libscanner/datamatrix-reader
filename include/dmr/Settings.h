@@ -116,7 +116,9 @@ struct Settings {
     /// without changing either the result or the cost of a normal frame: a
     /// camera image is processed in tens of milliseconds, a failed one with
     /// size search in seconds. Turn it off (0) only for processing trusted
-    /// images for which ten seconds is not enough.
+    /// images for which ten seconds is not enough. Off (0) and any larger
+    /// value mean the 60 s ceiling: a frame is never processed longer. For
+    /// images from an untrusted source set budgetMs as well.
     double timeoutMs = 10000.0;
 
     /// Split image-kernel rows — rectification, detector smoothing and
@@ -154,15 +156,22 @@ struct Settings {
     /// expensive part. Best enabled together with requireGs1 — the search
     /// increases the number of attempts and with them the chance of a false
     /// convergence.
+    ///
+    /// Values outside [kMinWarpScale, kMaxWarpScale] are skipped by the
+    /// scanner: the canvas grows with the square of the scale, and {400}
+    /// asked for 2.75 GB per candidate.
     std::vector<int> warpScales;
+    static constexpr int kMinWarpScale = 1;
+    static constexpr int kMaxWarpScale = 32;
 
     /// Parse the list of scales from a string such as "7,8,10".
     ///
     /// Provided by the library because settings arrive as strings not only
     /// from the command line but also from configuration files or form fields,
     /// and there is no need for every caller to parse them again. Unparsable
-    /// and non-positive values are silently skipped — this is a setting, not
-    /// user input, and there is nothing to fail on.
+    /// values and values outside [kMinWarpScale, kMaxWarpScale] are silently
+    /// skipped — this is a setting, not user input, and there is nothing to
+    /// fail on.
     void setWarpScales(const std::string& list);
 
     /// How many candidates to take from the L-pattern detector.
