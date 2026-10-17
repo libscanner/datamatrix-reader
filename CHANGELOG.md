@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.9 — 2026-10-17
+
+One more attempt on frames where nothing was read: the frame is downscaled by two (2×2 block averaging) and read again, within 200 ms of the remaining time budget. This rescues large symbols printed with heavy ink spread on crumpled film — around 15 pixels per module, where the print texture inside a module confused grid refinement at full resolution; downscaled, such a frame is read by the first fast pass in 20–50 ms. It applies only to frames at least 900 pixels on the shorter side.
+
+- Checked frame by frame against 1.0.8 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed.
+- Frames that are read are not slower. Frames that are not read at all spend at most 200 ms more, and never beyond the frame budget (`Settings::budgetMs`).
+
 ## 1.0.8 — 2026-10-15
 
 Security and robustness fixes from an internal audit. Recognition results are unchanged: checked frame by frame against 1.0.7 on our production-line sets — camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed.
