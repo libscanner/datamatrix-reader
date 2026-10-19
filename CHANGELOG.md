@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.10 — 2026-10-19
+
+- **New license signing key.** Our hosting provider reported unauthorised access to its virtualisation platform on 17 October 2026; the server's license signing key is considered compromised and has been replaced. Licenses are now signed with the new key, which only 1.0.10 trusts — **update to 1.0.10 before activating a license**. Earlier versions do not accept licenses issued from now on.
+- `Scanner::scanFile()` (C++), `dmr_scanner_scan_file()` (C ABI 3.1), `Scanner.scan_file()` / `dmr.scan_file()` (Python): load an image from disk and scan it under one frame deadline. Separate `loadImage()` + `scan()` each had their own deadline, so a heavy file could take two budgets.
+- The extra attempt on a frame downscaled by two (1.0.9) now counts the downscaling itself against its 200 ms, and is skipped for frames above 24 MP, where downscaling alone takes longer than that.
+- Online activation sends the product of the build: a key for another product is rejected by the server without taking a seat.
+- `--timeout-ms 0` help text and comments: 0 means the 60 s ceiling, not "no limit" (behaviour unchanged since 1.0.8).
+- Checked frame by frame against 1.0.9 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed.
+
 ## 1.0.9 — 2026-10-17
 
 One more attempt on frames where nothing was read: the frame is downscaled by two (2×2 block averaging) and read again, within 200 ms of the remaining time budget. This rescues large symbols printed with heavy ink spread on crumpled film — around 15 pixels per module, where the print texture inside a module confused grid refinement at full resolution; downscaled, such a frame is read by the first fast pass in 20–50 ms. It applies only to frames at least 900 pixels on the shorter side.

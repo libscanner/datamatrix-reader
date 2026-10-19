@@ -76,7 +76,7 @@ extern "C" {
  * like short ones.
  */
 #define DMR_C_ABI_VERSION_MAJOR 3
-#define DMR_C_ABI_VERSION_MINOR 0
+#define DMR_C_ABI_VERSION_MINOR 1
 
 DMR_C_API size_t dmr_c_abi_version(char* buf, size_t buf_size);
 
@@ -297,6 +297,19 @@ DMR_C_API dmr_scan_result_t* dmr_scanner_scan(dmr_scanner_t* scanner,
                                               const dmr_image_view_t* frame,
                                               int module_count);
 DMR_C_API void dmr_scan_result_free(dmr_scan_result_t* result);
+
+/* ABI 3.1 (library 1.0.10). An image from disk and the codes on it under ONE
+ * frame deadline (the scanner's budget_ms, timeout_ms): dmr_load_image_ex and
+ * dmr_scanner_scan called separately each measure their own deadline, so a
+ * heavy file could take two budgets. The image is loaded as grayscale, the
+ * size limit is the scanner's settings. Not loaded — status
+ * DMR_STATUS_IMAGE_TOO_LARGE or DMR_STATUS_INVALID (plus
+ * dmr_scan_result_timed_out if decoding hit the deadline); details in
+ * *load_status unless it is NULL. NULL — internal error, as with
+ * dmr_scanner_scan. */
+DMR_C_API dmr_scan_result_t* dmr_scanner_scan_file(dmr_scanner_t* scanner, const char* path,
+                                                   int module_count,
+                                                   dmr_load_status_t* load_status);
 
 DMR_C_API dmr_status_t dmr_scan_result_status(const dmr_scan_result_t* result);
 DMR_C_API int           dmr_scan_result_timed_out(const dmr_scan_result_t* result);

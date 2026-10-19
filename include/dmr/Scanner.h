@@ -119,6 +119,24 @@ public:
     /// @param moduleCount  symbol side in modules; 0 — auto-detect
     ScanResult scan(ImageView frame, int moduleCount = 0) const;
 
+    /// Read an image from disk and the codes on it under ONE frame deadline.
+    ///
+    /// loadImage() and scan() called separately each measure their own
+    /// deadline, so a heavy file (progressive JPEG, huge PNG) could take two
+    /// budgets. Here the deadline (Settings::budgetMs, timeoutMs) starts with
+    /// loading, and scanning gets what is left.
+    ///
+    /// The image is loaded as grayscale; the size limit is
+    /// Settings::imageLimits. Not loaded — status ImageTooLarge (over the
+    /// limit) or InvalidImage (no file, not an image, or the deadline expired
+    /// while decoding — then timedOut is set too); details in *load.
+    ///
+    /// @param path         image path (UTF-8)
+    /// @param moduleCount  symbol side in modules; 0 — auto-detect
+    /// @param load         load outcome; nullptr — not needed
+    /// @since 1.0.10
+    ScanResult scanFile(const std::string& path, int moduleCount = 0, LoadStatus* load = nullptr) const;
+
     /// Symbol size suggested by previous frames; 0 — no hint.
     int moduleCountHint() const;
 
