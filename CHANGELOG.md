@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.11 — 2026-10-21
+
+Better reading of large phone photos with big, smeared modules.
+
+- After the frame downscaled by two (1.0.9), frames at least 1050 pixels on the shorter side get one more attempt, downscaled by three. Modules of 25–30 pixels with heavy ink spread or thermal-print dropouts stay textured after 2×2 averaging; after 3×3 they are read by the first fast pass in 20–80 ms. Each attempt keeps its own 200 ms limit.
+- Time for these attempts is now reserved up front: on a large frame the full-resolution search stops that much earlier, so a frame whose full search runs into the time budget still gets its downscaled attempts. Before, such photos were cut off by a 3 s budget before reaching the attempt that reads them.
+- On 104 unread photos from our online demo, with a 3 s budget: 5 → 15 read, all with valid GS1 structure.
+- Checked frame by frame against 1.0.10 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed (their frames are below 900 pixels and are not affected). Corpus frames upscaled 2× and 3× (800 each): no frame lost or changed, same time.
+
 ## 1.0.10 — 2026-10-19
 
 - **New license signing key.** Our hosting provider reported unauthorised access to its virtualisation platform on 17 October 2026; the server's license signing key is considered compromised and has been replaced. Licenses are now signed with the new key, which only 1.0.10 trusts — **update to 1.0.10 before activating a license**. Earlier versions do not accept licenses issued from now on.
