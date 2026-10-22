@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.12 — 2026-10-22
+
+Reads a white label on a dark container when the dark background comes right up to the code.
+
+- When the symbol's quiet zone is about one module or less and a dark surface (a can, a bottle) touches the code on several sides, the symbol and the background used to merge into one blob: the symbol outline snapped to the crop axes and lost the symbol's tilt, and grid refinement then put the edge on the background. Now such a candidate gets a twin in which the dark area connected to the crop border is painted as paper, and the twin is read before the deep search. Clean symbols that previously failed in 1.8–2.7 s now read in 0.2–0.4 s.
+- Checked frame by frame against 1.0.11 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed. Time on readable frames is unchanged (p90 14.6 ms); frames that are not read at all spend a few milliseconds more.
+
 ## 1.0.11 — 2026-10-21
 
 Better reading of large phone photos with big, smeared modules.
