@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.13 — 2026-11-02
+
+Messages in English.
+
+- The command-line tool, license messages, errors and the debug log now speak English on any non-Russian system and Russian on a Russian one. `--lang ru|en` or the `LIBSCANNER_LANG` environment variable set the language explicitly. `--json` output and `--batch`/`--serve` result lines do not depend on the language.
+- `dmr::setMessageLanguage()` / `dmr::messageLanguage()` (`dmr/Diagnostics.h`) choose the language from a program; the Python package follows `LIBSCANNER_LANG` and the system language.
+- File paths that are not ASCII: on Windows they are converted through the Windows code page instead of the C runtime locale, on POSIX passed as bytes unchanged.
+- Reading is unchanged. Checked frame by frame against 1.0.12 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed.
+
 ## 1.0.12 — 2026-10-22
 
 Reads a white label on a dark container when the dark background comes right up to the code.

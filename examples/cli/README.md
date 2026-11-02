@@ -4,8 +4,9 @@ The `dmr` tool ships in every archive (`bin/dmr`, `bin\dmr.exe`), in the CLI-onl
 `…-cli.tar.gz`) and in the Python wheel (after `pip install` the `dmr` command is on the environment's `PATH`;
 `python -m dmr` works too). Full option list: `dmr --help`.
 
-The tool prints its messages in Russian: “запуск” is startup time, “обработка” is processing time, “код” is
-the decoded code.
+Since 1.0.13 the tool speaks the system language: English on any non-Russian system, Russian on a Russian one.
+`--lang en|ru` or the `LIBSCANNER_LANG` environment variable set it explicitly. `--json` output and
+`--batch`/`--folder`/`--serve` result lines are the same in both languages.
 
 ## Usage
 
@@ -15,15 +16,16 @@ dmr --batch  <list>  [module_count] [--verbose]
 dmr --folder <directory> [module_count] [--verbose]
 dmr --serve  [module_count] [--verbose]
 dmr --license status | activate <key> | refresh | deactivate | fingerprint [--json]
+# any of the above: --lang en|ru
 ```
 
 ## Single image
 
 ```console
 $ dmr label.jpg
-запуск: 4.6 мс
-обработка: 24.9 мс
-код: 0104627191145677215n5Gr,pHTGIU&<GS>93CuXU
+startup: 4.6 ms
+processing: 24.9 ms
+code: 0104627191145677215n5Gr,pHTGIU&<GS>93CuXU
 ```
 
 Useful options:
@@ -75,7 +77,7 @@ dmr --license status --json      # one JSON line, for scripts
 
 ```console
 $ dmr --license status --json
-{"state":"trial","can_scan":true,"valid_until":1792831857,"refresh_after":0,"offline_until":0,"days_left":28,"license_id":"","activation_id":"","offline_mode":"","clock_rollback":false,"message":"Пробный период: осталось 28 дн."}
+{"state":"trial","can_scan":true,"valid_until":1792831857,"refresh_after":0,"offline_until":0,"days_left":28,"license_id":"","activation_id":"","offline_mode":"","clock_rollback":false,"message":"Trial period: 28 days left"}
 ```
 
 `state` is a stable machine-readable code: `trial`, `active`, `refresh_due`, `trial_expired`, `expired`,

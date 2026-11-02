@@ -88,6 +88,16 @@ bool isVerbose();
 /// The debug log stream: to the sink if there is one, otherwise discarded.
 std::ostream& dbg();
 
+/// Language of library messages (license state, errors, debug log): "ru" or
+/// "en". By default it comes from the LIBSCANNER_LANG environment variable,
+/// otherwise from the system language: Russian system — Russian, any other —
+/// English. The choice applies to the whole process. Anything other than "ru"
+/// or "en" returns false and leaves the language unchanged.
+bool setMessageLanguage(std::string_view lang);
+
+/// Current message language: "ru" or "en".
+std::string_view messageLanguage();
+
 } // namespace dmr
 
 // Short name for places where debug output is obvious from context.
