@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.14 — 2026-11-04
+
+Reads codes with heavy ink spread, and code images with no margin.
+
+- **Ink spread.** When the dark modules are printed noticeably thicker than the light ones (smeared ink, an over-exposed phone photo), the symbol size measured from the alternating border pattern came out wrong (a 36×36 symbol was measured as 32, 48, 52 or 72) and the grid drifted by a module. Frames on which nothing was read now get two last attempts with the dark modules thinned by one pixel on each side (3×3 maximum filter): at full resolution and downscaled by two. Each has its own 300 ms limit, reserved up front only when the frame's time budget is at least three times that; with short budgets (a conveyor camera, 60–100 ms) the attempts are skipped and reading is exactly as before.
+- **No margin.** A small image (up to 512 pixels) whose symbol fills the whole frame, with no quiet zone at all, is retried with a white border added. Corners are reported in the original image's coordinates.
+- On 69 unread photos from our online demo and chat bot, with a 3 s budget: 1 → 25 read. On a second set of 173 sharp unread DataMatrix photos: 2 → 10, all strings confirmed by another reader.
+- Checked frame by frame against 1.0.13 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed. With 60 and 100 ms budgets the conveyor reads the same frames as 1.0.13. Only frames that are not read at all spend up to 0.6 s more.
+
 ## 1.0.13 — 2026-11-02
 
 Messages in English.
