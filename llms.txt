@@ -25,8 +25,8 @@ The public headers are the authoritative API reference: every type, field and fu
 
 ## Docs
 
-- [Full documentation — C++ and C ABI (Markdown)](https://libscanner.com/en/docs/datamatrix-gs1/1.0/cpp.md): installation, linking on Windows and Linux, settings, result fields, licensing, command line
-- [Full documentation — Python (Markdown)](https://libscanner.com/en/docs/datamatrix-gs1/1.0/python.md)
+- [Full documentation — C++ and C ABI (Markdown)](https://libscanner.com/en/docs/datamatrix-gs1/1.1/cpp.md): installation, linking on Windows and Linux, settings, result fields, licensing, command line
+- [Full documentation — Python (Markdown)](https://libscanner.com/en/docs/datamatrix-gs1/1.1/python.md)
 - [Both libraries, all documentation in one file](https://libscanner.com/llms-full.txt)
 - [README](README.md): platforms, release files, key numbers
 

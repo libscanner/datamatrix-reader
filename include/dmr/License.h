@@ -94,6 +94,11 @@ struct LicenseStatus {
     /// beyond this time; 0 — no limit (full mode).
     int64_t offlineUntil = 0;
 
+    /// Emergency extension: the license server is unavailable, and the offline
+    /// period has been extended up to this time (offlineUntil already includes
+    /// it); 0 — no extension. Since 1.1.0.
+    int64_t emergencyUntil = 0;
+
     /// Whole days until the nearest of the limits above; 0 — a limit has passed.
     int daysLeft = 0;
 
