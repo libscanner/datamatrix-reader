@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.1 — 2026-11-10
+
+Reads large symbols on phone photos.
+
+- **Large symbol, large module.** A DataMatrix that fills a big part of a phone photo — 500–1800 pixels across, 15–80 pixels per module — was found but not read: the sampling grid caught on the print texture inside the modules. When nothing is read, the reader now retries each large candidate found by the full pass (up to two) cut out with a margin and downscaled so that the symbol is about 240 pixels across, and also the whole frame downscaled by 4, 6 and 8 for symbols the detectors see only in pieces (dot-peen marking, laser on metal, a symbol filling the whole frame). Each retry has its own time limit within the frame's budget; with short budgets (a conveyor camera, 60–100 ms) the retries are skipped.
+- On 609 unread photos from our online demo and chat bot, with a 3 s budget: 73 → 101 photos read, no string changed. Of 38 sharp DataMatrix photos that another open-source reader reads and we did not, 12 are now read.
+- Checked frame by frame against 1.1.0 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019; no frame lost, no string changed. With 60 and 100 ms budgets the conveyor reads the same frames. Only frames that are not read at all spend more time, within the same budget.
+
 ## 1.1.0 — 2026-11-06
 
 Licensing for containers; reading is exactly the same as in 1.0.14 (checked frame by frame on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019, no frame lost, no string changed).
