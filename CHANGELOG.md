@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.2 — 2026-11-11
+
+Faster on phone photos.
+
+- **Large candidates are downscaled in the full pass.** A candidate cut out larger than 640 pixels is now downscaled by block averaging before decoding (the previous limit was 2048). A large symbol on a phone photo — 15–80 pixels per module — is read by the full pass itself instead of waiting for the retries added in 1.1.1.
+- **Soft gate detectors only on small frames.** The extra detectors for strongly tilted symbols (65–70° plane tilt) run only on frames whose shorter side is under 1000 pixels — camera and conveyor frames. On a phone photo they took 1.1–2.8 s of a 4 s budget on two cores and read nothing.
+- On 609 unread photos from our online demo and chat bot, 2 cores and a 4 s budget, as in our demo: the same 95 photos read, median time 3025 → 2810 ms; of 38 hard photos 10 read (9 in 1.1.1).
+- Checked frame by frame against 1.1.1 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed; with 60 and 100 ms budgets the conveyor reads the same frames.
+
 ## 1.1.1 — 2026-11-10
 
 Reads large symbols on phone photos.
