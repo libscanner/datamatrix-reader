@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.3 — 2026-11-14
+
+Vector kernels for ARM (NEON) and AVX-512; reading is exactly the same as in 1.1.2.
+
+- **AVX-512.** On processors with AVX-512 (F, DQ, BW, VL — Intel Xeon since Skylake-SP, Ice Lake, Sapphire Rapids; AMD Zen 4 and Zen 5) the library uses 512-bit kernels for image warping, line segment detection, adaptive threshold, box filter, smoothing and the module grid; elsewhere it uses AVX2 as before. On an AMD Ryzen 9 9950X3D (Zen 5), one core: −6.5 % mean and −7.7 % median time per frame against AVX2 on our pharmacy-line set, same strings; no clock drop under AVX-512. `DM_SIMD=avx2` forces the AVX2 kernels.
+- **ARM (NEON).** Three more kernels on 64-bit ARM (integral image, colour to gray, column sort): −1.6…−2.5 % per frame on a Raspberry Pi 4, one core.
+- **Builds with GCC 14** (Debian 13 and newer): the bundled zlib is configured with `HAVE_UNISTD_H`.
+- Checked frame by frame against 1.1.2 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed.
+
 ## 1.1.2 — 2026-11-11
 
 Faster on phone photos.
