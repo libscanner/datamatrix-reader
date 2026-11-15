@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.1 — 2026-11-15
+
+More codes read when several are wanted: the network crops are cut tighter.
+
+- **Tighter crops.** A place found by the network is now read first from a crop with a 5 % margin around it (it was 30 %); only if that fails, again with 30 % — the network box is sometimes smaller than the symbol. The wide crop took in the label edge and the background, the fast pass broke on those straight lines, and the crop fell into a deep search that did not fit its 250 ms. All the source crops of our test frames are read on their own; what was lost was the crop window.
+- **Several symbols under one detection.** A detection four times larger than the median one in the frame (the network boxed several symbols together) is read for several codes instead of one.
+- 16 DataMatrix symbols per frame, all codes, 8 cores, 4 s budget: 12-megapixel frames — 96.8 % of codes instead of 87.6 % (all 16 read on 70 % of frames instead of 24 %), 0.45 s instead of 0.37 s per frame; crops of real photos — 88.2 % instead of 79.1 %; with 1–10 codes per frame — 97.0 % instead of 84.4 %, and faster (0.15 s instead of 0.19 s). A longer, adaptive crop time limit was also tried: 1–2 points more at 2.5–4 times the frame time, not taken.
+- Single-code mode is unchanged. Checked frame by frame against 1.2.0 on our production-line sets in both modes (one code and all codes): camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed, same speed.
+
 ## 1.2.0 — 2026-11-15
 
 A symbol-finding network inside the library: much better and faster when several codes are wanted; single-code reading is unchanged.
