@@ -231,6 +231,51 @@ struct Settings {
     /// the frame crop in memory, about two megabytes per result. In a frame
     /// stream that is extra memory pressure for data nobody asked for.
     bool collectDetails = false;
+
+    // ── Symbol-finding network ─────────────────────────────────────────────
+
+    /// The symbol-finding network: Auto — by task (default), On — always,
+    /// Off — never.
+    ///
+    /// A small network (compiled into the library) finds where the symbols
+    /// are in tens of milliseconds; each place is read from its crop, and the
+    /// whole frame is searched as without the network only if the network
+    /// found nothing, the crops read nothing, or one code is wanted and the
+    /// crops did not give it.
+    ///
+    /// Auto turns the network on when more than one code is wanted
+    /// (maxCodes != 1): there the full pass runs into the candidate limit and
+    /// walks all candidates to the end, while reading each symbol from its
+    /// crop does not. Measured on crops of real photos with 16 DataMatrix
+    /// symbols per frame: all codes read on 32 % of frames instead of 0 %,
+    /// 79 % of codes instead of 23 %. In single-code mode Auto keeps the
+    /// network off: on a conveyor frame read in tens of milliseconds it would
+    /// add 30–80 ms. Use On if you want it there too.
+    enum class NetMode { Auto, On, Off };
+    NetMode netMode = NetMode::Auto;
+
+    // ── Threads ────────────────────────────────────────────────────────────
+
+    /// How many threads one scan() call may use, including the caller;
+    /// 0 — all cores of the machine (default), 1 — only the caller.
+    ///
+    /// The library has one thread pool per process, sized to all logical
+    /// cores; this limit caps how much of it THIS scanner uses: the deep
+    /// candidate search, row splitting, the network and its crops. The result
+    /// does not depend on it, only the time.
+    ///
+    /// Set it when the process has fewer cores than the machine shows — in a
+    /// container with a CPU quota the library sees all host cores, and
+    /// threads above the quota only wait for it — or when several scanners
+    /// run on one machine.
+    int threads = 0;
 };
+
+/// Whether the symbol-finding network is on with these settings
+/// (Settings::netMode).
+inline bool netEnabled(const Settings& s) {
+    if (s.netMode != Settings::NetMode::Auto) return s.netMode == Settings::NetMode::On;
+    return s.maxCodes != 1;
+}
 
 } // namespace dmr

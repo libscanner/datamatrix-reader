@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0 — 2026-11-15
+
+A symbol-finding network inside the library: much better and faster when several codes are wanted; single-code reading is unchanged.
+
+- **Symbol-finding network (`Settings::netMode`).** A small network, compiled into the library, finds where the symbols are; each place is read from its crop, and the whole frame is searched only if the crops read nothing. `Auto` (the default) turns it on when more than one code is wanted (`maxCodes != 1`); `On` — always; `Off` — never. On crops of real photos with 16 DataMatrix symbols per frame: all 16 read on 32 % of frames instead of 0 %, 79 % of codes instead of 23 %. On 12-megapixel frames with 16 symbols: 87 % of codes instead of 50 %, 0.28 s instead of 0.98 s on 8 cores. In single-code mode `Auto` keeps the network off, so a conveyor or camera stream reads exactly as before.
+- **Thread limit (`Settings::threads`).** How many threads one `scan()` may use, including the caller: 0 — all cores (default), 1 — only the caller. The result does not depend on it. Set it in a container with a CPU quota (the library sees all host cores there) or when several scanners share a machine.
+- **Faster with several cores.** The network and its crops run on the library's thread pool. A 12-megapixel frame with 16 symbols: 0.97 s on one core, 0.37 s on four, 0.28 s on eight.
+- **C ABI 3.2:** `net_mode` and `threads` appended to `dmr_settings_t`; programs built with a 3.0–3.1 header get the defaults. **Python:** `Settings.use_net` (None / True / False) and `Settings.threads`. **Command line:** `--net auto|on|off`, `--threads N`.
+- Checked frame by frame against 1.1.3 on our production-line sets in the default (single-code) mode: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed, same speed. Looking for all codes (`--codes 0`) on the same single-symbol streams the frames are read 7–16 times faster (median 436 → 26 ms and 193 → 27 ms); 3 of 12 978 frames that 1.1.3 read only thanks to the stream size hint are not read there (the hint is not built when the crops read the frames), one new frame is read.
+
 ## 1.1.3 — 2026-11-14
 
 Vector kernels for ARM (NEON) and AVX-512; reading is exactly the same as in 1.1.2.

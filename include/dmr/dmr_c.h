@@ -74,9 +74,14 @@ extern "C" {
  * settings passed the check while the library read 8 bytes past the end of
  * the struct. Settings without the marker (1.x, 2.0) are now rejected just
  * like short ones.
+ *
+ * ABI 3.2 (dmr 1.2.0): net_mode (the symbol-finding network) and threads (the
+ * thread limit) are appended to dmr_settings_t. A program built with a
+ * 3.0–3.1 header does not pass them and gets the defaults: 0 — the network by
+ * task, 0 — all cores.
  */
 #define DMR_C_ABI_VERSION_MAJOR 3
-#define DMR_C_ABI_VERSION_MINOR 1
+#define DMR_C_ABI_VERSION_MINOR 2
 
 DMR_C_API size_t dmr_c_abi_version(char* buf, size_t buf_size);
 
@@ -216,6 +221,16 @@ struct dmr_settings {
      * select the scanner's mode of operation. Preset default is 10000. Also
      * applies to decoding in dmr_load_image_ex. */
     double  timeout_ms;
+    /* ── ABI 3.2 ──
+     * The symbol-finding network (dmr::Settings::netMode): 0 — by task
+     * (default: on when max_codes != 1), 1 — always, -1 — never. The network
+     * is compiled into the library. A caller with a header older than 3.2
+     * does not pass the field and gets 0. */
+    int     net_mode;
+    /* How many threads one dmr_scan call may use (dmr::Settings::threads),
+     * including the caller: 0 — all cores (default), 1 — only the caller.
+     * The result does not depend on it. ABI 3.2. */
+    int     threads;
 };
 
 /* Settings marker for ABI 3.x: the bytes 'D' 'M' 'R' '3' (little-endian). */
