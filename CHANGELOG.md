@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.2 — 2026-11-17
+
+Industrial camera frames of 20–40 megapixels: the scout network now sees the codes on them, also on very dark and overexposed frames.
+
+- **Network on large and dark frames.** On frames larger than 8 MP the network looks at a 1 MP input instead of 250 thousand pixels (the symbols there were too small for it); dark and low-contrast frames are stretched in brightness before the network.
+- **Short round of crops.** When the number of codes is given (`maxCodes` > 0), the crops are first read with a short time limit (25 ms tight, 80 ms wide); the rest of the frame is cancelled as soon as that many codes are read; crops left unread get the full limit in the second round.
+- **Cancellation from outside** (`dmr::deadline::CancelScope`) is checked inside the pipeline.
+- **`Settings::thinShare`** — share of the frame budget kept for the thinned-dark attempt (spread ink); the network crops set it, so a symbol with spread ink on a crop is read in 30–200 ms instead of not at all.
+- **Faster PNG loading** — 8-bit gray and RGB through libdeflate and our own row filters (bit-exact with libpng): a 20 MP PNG in 165 ms instead of 269.
+- 12 threads, 4 s budget, 10 DataMatrix per frame: 20 MP camera frames — 785 of 810 codes instead of 611, median 267 ms instead of 673; 40 MP — 200 of 200 instead of 156, 580 ms instead of 1077; overexposed 20 MP — 200 of 200 instead of 142; dark synthetic frames with 50 codes — 98.9 % of DataMatrix instead of 91.1 %; dark 24–48 MP frames — 338 of 338 instead of 283.
+- The cost: with all codes on frames up to 8 MP with dozens of symbols, the median frame time is about a third longer (554 → 742 ms on our 50-code set).
+- Single-code mode is unchanged. Checked frame by frame against 1.2.1 on our production-line sets in both modes: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed, same speed.
+
 ## 1.2.1 — 2026-11-15
 
 More codes read when several are wanted: the network crops are cut tighter.

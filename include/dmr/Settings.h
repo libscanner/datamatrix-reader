@@ -182,6 +182,19 @@ struct Settings {
     /// more full decode pass.
     int maxCandidates = 6;
 
+    /// Share of the frame budget to keep for the last attempt — the frame with
+    /// thinned dark (spread ink) — when the budget is short; 0 — keep none.
+    ///
+    /// Normally this attempt gets time only when it is at most a third of the
+    /// frame budget: a conveyor camera (60–100 ms) would otherwise not have
+    /// enough for the full frame. A crop around a found symbol (250 ms budget)
+    /// never has enough, and a symbol with spread ink is not read there: the
+    /// full search of the crop takes the whole budget, while the thinned crop
+    /// of such a symbol reads in 30–200 ms. Set by the network crops (Scanner)
+    /// and by unir — together with a crop budget extended by this share; an
+    /// ordinary frame does not need it.
+    double thinShare = 0.0;
+
     /// Memory limit, MB per frame, for reusing intermediate work; 0 — store
     /// nothing. Does not affect the RESULT: whatever does not fit is recomputed.
     double readerCacheMb = 64.0;
