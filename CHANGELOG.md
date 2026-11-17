@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.3 — 2026-11-17
+
+- **Dark thinning on network crops — only on the wide retry.** In 1.2.2 the thinning attempt with its extra 100 ms also ran on the first, tight pass (5 % margin). The tight window cuts the symbol, so such a crop was not read with thinning either and only paid for it; the wide retry read it anyway. Now the tight pass and the short round go without thinning, as in 1.2.1, and the wide retry keeps it.
+- 12 threads, 4 s budget, against 1.2.2: frames up to 8 MP with up to 50 codes, all codes — median 740 → 642 ms with the same codes (1.2.1: 554 ms); 20 MP camera frames with 10 DataMatrix — 784 of 810 codes (785 in 1.2.2), p90 679 → 339 ms; 24–48 MP frames — the same codes, 943 → 824 ms; the roll with spread ink — the same 5 of 9 photos.
+- Checked frame by frame against 1.2.2 on our production-line sets in both modes: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed.
+
 ## 1.2.2 — 2026-11-17
 
 Industrial camera frames of 20–40 megapixels: the scout network now sees the codes on them, also on very dark and overexposed frames.
