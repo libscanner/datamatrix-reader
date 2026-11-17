@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.4 — 2026-11-17
+
+- **Faster scout network, the same output.** The network inside dmr no longer zero-fills and reallocates its tensors on every frame (they live between frames, in buffers shared by lifetime — 26 MB at a 1 MP input), fuses the upsampling with the addition, applies SiLU right after each convolution strip, downsizes the frame with AVX2 kernels and runs wide 3×3 convolutions directly, without im2col. The network output is bit-identical to 1.2.3 (layer hashes checked on camera frames, AVX2 and scalar), so the same codes are found.
+- The dmr utility with PNG decoding, 12 threads, 10 DataMatrix per frame: 20 MP camera frames — median 269 → 243 ms, 40 MP — 573 → 525 ms; large frames and frames with ~50 codes — unchanged.
+- **License server refusal explained.** A request without a nonce is now refused by the server with the code `CLIENT_OUTDATED` (before, the text "nonce is required" was shown as is); dmr explains it: an outdated program or a request altered on the way (a proxy, an antivirus that inspects HTTPS).
+- Checked frame by frame against 1.2.3 on our production-line sets in both modes: camera conveyor 8923 of 8959 (all codes: 8921), pharmacy line 4012 of 4019 — no frame lost, no string changed; all codes mode is 6 % faster on both sets.
+
 ## 1.2.3 — 2026-11-17
 
 - **Dark thinning on network crops — only on the wide retry.** In 1.2.2 the thinning attempt with its extra 100 ms also ran on the first, tight pass (5 % margin). The tight window cuts the symbol, so such a crop was not read with thinning either and only paid for it; the wide retry read it anyway. Now the tight pass and the short round go without thinning, as in 1.2.1, and the wide retry keeps it.
