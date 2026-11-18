@@ -1,12 +1,14 @@
 **English** | [Русский](https://github.com/libscanner/datamatrix-reader/blob/main/README.ru.md)
 
-# DataMatrix Reader library (dmr)
+# libscanner dmr — DataMatrix Reader library
 
 Reads GS1 DataMatrix codes from industrial camera frames — for conveyor lines marked under Chestny ZNAK, the Russian product marking system.
 
-`dmr` is a commercial, closed-source C++20 library with a flat C ABI, a Python package and a command-line tool. It reads **DataMatrix (ECC 200)** symbols at low capture resolution — around two pixels per module, a symbol about a hundred pixels across — and verifies every geometry hypothesis with Reed–Solomon error correction. An optional GS1 mode accepts only codes with GS1 structure (AI 01 with a valid GTIN check digit, then AI 21).
+**libscanner dmr** (`pip install libscanner-dmr`) is a commercial, closed-source C++20 library with a flat C ABI, a Python package and a command-line tool. It reads **DataMatrix (ECC 200)** symbols at low capture resolution — around two pixels per module, a symbol about a hundred pixels across — and verifies every geometry hypothesis with Reed–Solomon error correction. An optional GS1 mode accepts only codes with GS1 structure (AI 01 with a valid GTIN check digit, then AI 21).
 
 This repository contains the public headers, examples, documentation links and license texts. **It contains no library source code.** Prebuilt binaries are attached to [GitHub Releases](https://github.com/libscanner/datamatrix-reader/releases/latest).
+
+**Not open source:** every build runs a 30-day trial on a machine, then needs a paid license from <https://libscanner.com/en/pricing/>. It is not related to other projects named “datamatrix-reader”.
 
 **For AI coding assistants:** start with [`llms.txt`](llms.txt) — an index of the headers, examples and the full documentation in Markdown.
 
