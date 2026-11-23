@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.2.5 — 2026-11-23
+
+- **Scout network in 8-bit integers.** The network that finds symbols for the all-codes mode now runs on int8 weights and activations (AVX2, AVX-VNNI, AVX-512 VNNI and NEON kernels, chosen at run time; a scalar reference everywhere else). The model was fine-tuned with quantization in the loop against the float network, so the symbol boxes keep their size. The network output is bit-identical between the kernels and to the reference implementation.
+- The single-code mode is unchanged: it still runs without the network (with it, a conveyor frame took 1.6–2.2× longer for the same codes).
+- The Python package metadata says plainly: commercial, closed-source software.
+- Checked frame by frame against 1.2.4 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed.
+
 ## 1.2.4 — 2026-11-17
 
 - **Faster scout network, the same output.** The network inside dmr no longer zero-fills and reallocates its tensors on every frame (they live between frames, in buffers shared by lifetime — 26 MB at a 1 MP input), fuses the upsampling with the addition, applies SiLU right after each convolution strip, downsizes the frame with AVX2 kernels and runs wide 3×3 convolutions directly, without im2col. The network output is bit-identical to 1.2.3 (layer hashes checked on camera frames, AVX2 and scalar), so the same codes are found.
