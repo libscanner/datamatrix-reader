@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.6 — 2026-11-25
+
+- **A short time budget no longer runs out before the first pass on large frames.** On frames whose shorter side is 900 px or more, a 60, 100 or 500 ms budget used to go entirely into the reserve for the last attempts (downscaled frame, dark thinning), so the full pass started with no time left. The reserve now takes at most a third of the budget; without a budget and with budgets of 3 s and more the ladder of attempts is unchanged.
+- A 704×450 shot pasted into a larger field: 1280×1024 at 60 ms — 7 of 500 → 496 of 500; 2448×2048 at 500 ms — 5 of 250 → 249 of 250; 4000×3000 at 60 ms — 0 of 100 → 100 of 100. No frame lost, no string changed.
+- Checked frame by frame against 1.2.5 on our production-line sets: camera conveyor 8923 of 8959, pharmacy line 4012 of 4019 — no frame lost, no string changed.
+
 ## 1.2.5 — 2026-11-23
 
 - **Scout network in 8-bit integers.** The network that finds symbols for the all-codes mode now runs on int8 weights and activations (AVX2, AVX-VNNI, AVX-512 VNNI and NEON kernels, chosen at run time; a scalar reference everywhere else). The model was fine-tuned with quantization in the loop against the float network, so the symbol boxes keep their size. The network output is bit-identical between the kernels and to the reference implementation.
